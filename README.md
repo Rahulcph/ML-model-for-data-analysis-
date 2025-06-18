@@ -23,8 +23,4 @@ This project analyzes participation data from three machine learning events usin
 
 
 
-print("\n📋 SUMMARY TABLE:")
-print(summary_df.to_string(index=False))
 
-# Save summary if needed
-# summary_df.to_csv('participation_summary.csv', index=False)
