@@ -414,3 +414,27 @@ print(summary_df.to_string(index=False))
 
 # Save summary if needed
 # summary_df.to_csv('participation_summary.csv', index=False)
+
+
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
+
+# Encode categorical columns
+for col in ['Job Profile', 'Location', 'Organization', 'Experience Level']:
+    df[col] = LabelEncoder().fit_transform(df[col])
+
+# Define features and label
+features = ['Job Profile', 'Location', 'Organization', 'Experience Level', 'Event_1', 'Event_2', 'Event_3']
+X = df[features]
+y = (df['Event_4'] == 1).astype(int)  # Or use Event_3 if predicting earlier
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Train model
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
